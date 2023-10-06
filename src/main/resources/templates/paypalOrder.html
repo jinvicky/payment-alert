@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>Let's order by PayPal!</h3>
+<div class="product-btn">
+    <div class="paypal-buttons"></div>
+</div>
+</body>
+<!--client ID thymeleaf 써보려다 실패함.-->
+<script src="https://www.paypal.com/sdk/js?client-id=AdbmLdHQDgWRUFwZO9Bfkq2Qhdsh5ngP8eMXKAp5vgOy4TfxSHLR7uzYq8NIUQ5MTHj4FE4x7KftxeMo&currency=USD"></script>
+
+<script>
+    paypal.Buttons({
+        createOrder: function (data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: '10.0',
+                        currency_code: 'USD'
+                    },
+                    description: 'jinvicky order test',
+                    custom_id: '10017'
+                }]
+            });
+        },
+        onApprove: function (data, actions) {
+            return actions.order.capture().then(function (details) {
+                return fetch('/order/checkout?id=' + details.id) //내가 controller에서 주문 처리할 메서드 경로랑 연결
+                    .then(function (result) {
+                        window.location.href = '/order/detail?id=' + result.id; //결제 성공 후 주문 아이디를 파람으로 상세 페이지로 이동
+                    }).catch(function () {
+                        alert('서버와 통신이 실패 했습니다.');
+                    });
+            });
+        }
+    }).render('.paypal-buttons');
+</script>
+</html>
