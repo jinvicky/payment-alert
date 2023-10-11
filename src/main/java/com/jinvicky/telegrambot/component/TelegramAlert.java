@@ -35,14 +35,13 @@ public class TelegramAlert {
     private String chatId;
 
     public void sendAlert (String contents) {
-
         BufferedReader in = null;
         String url = "https://api.telegram.org/bot" + token + "/sendMessage?chat_id="+ chatId + "&text=";
 
         try {
             // 메세지 생성
             StringBuffer sb = new StringBuffer();
-            sb.append("[").append(contents).append("]");
+            sb.append("주문 결과 : ").append(contents);
 
             url += sb.toString();
 
@@ -89,4 +88,24 @@ public class TelegramAlert {
             logger.error("telegram alert send failed", e);
         }
     }
+
+
+    private String generatedMessage() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("[Notification]").append(System.getProperty("line.separator"))
+                .append("[Name] : ").append("Tester").append(System.getProperty("line.separator"))
+                .append("[Message] : ").append("테스트 메세지 !!");
+        return sb.toString();
+    }
+
+    public void sendTelegram() {
+        logger.info("#### send Notification. ");
+
+        String contents = generatedMessage();
+
+        //send telegram
+        sendAlert2(contents);
+    }
+
 }

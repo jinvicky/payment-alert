@@ -1,6 +1,8 @@
 package com.jinvicky.telegrambot.service;
 
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -9,6 +11,7 @@ import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
 import java.net.URL;
 import java.util.Base64;
+import java.util.Map;
 import java.util.Scanner;
 
 import org.json.simple.JSONObject;
@@ -66,9 +69,7 @@ public class PaypalService {
             in.close();
 
             jsonObject = (JSONObject) jsonParser.parse(response.toString());
-
-            log.info("파트너 인증 토큰 발급 response: " + jsonObject.toString());
-
+//            log.info("파트너 인증 토큰 발급 response: " + jsonObject.toString());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -103,7 +104,7 @@ public class PaypalService {
                 : httpConn.getErrorStream();
         Scanner s = new Scanner(responseStream).useDelimiter("\\A");
         String response = s.hasNext() ? s.next() : "";
-        System.out.println("응답 테스트...." + response);
+//        System.out.println("응답 테스트...." + response);
     }
 
     //주문정보 조회
@@ -123,6 +124,7 @@ public class PaypalService {
                 : httpConn.getErrorStream();
         Scanner s = new Scanner(responseStream).useDelimiter("\\A");
         String response = s.hasNext() ? s.next() : "";
+
         return response;
     }
 
