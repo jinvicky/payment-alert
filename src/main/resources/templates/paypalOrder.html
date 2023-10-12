@@ -28,14 +28,16 @@
         onApprove: function (data, actions) {
             return actions.order.capture().then(function (details) {
                 window.location.href = '/order/detail?id=' + details.id;
-                // return fetch('/order/checkout?id=' + details.id) //내가 controller에서 주문 처리할 메서드 경로랑 연결
-                //     .then(function (result) {
-                //         window.location.href = '/order/detail?id=' + details.id; //결제 성공 후 주문 아이디를 파람으로 상세 페이지로 이동
-                //     }).catch(function () {
-                //         alert('서버와 통신이 실패 했습니다.');
-                //     });
             });
         }
     }).render('.paypal-buttons');
 </script>
 </html>
+
+<!-- function(details) {} 안 내용... 근데 이거 잘 모르겠음. -->
+<!--// return fetch('/order/checkout?id=' + details.id) //내가 controller에서 주문 처리할 메서드 경로랑 연결
+                //     .then(function (result) {
+                //         window.location.href = '/order/detail?id=' + details.id; //결제 성공 후 주문 아이디를 파람으로 상세 페이지로 이동
+                //     }).catch(function () {
+                //         alert('서버와 통신이 실패 했습니다.');
+                //     });-->

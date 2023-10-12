@@ -8,11 +8,10 @@
 <h1>Order Detail</h1>
 Id : <h3 th:text="${orderDetail.id}"></h3>
 User Email: <h3 th:text="${orderDetail.payment_source.paypal.email_address}"></h3>
-<!--email address : <h3 th:text="${orderDetail.payment_source}"></h3>-->
-<!--Status : <h3 th:text="${orderDetail.status}"></h3>-->
-<!--amount : <h3 th:text="${orderDetail.amount.value}"></h3><span th:text="${orderDetail.amount.currency_code}"></span>-->
-<!--description : <h3 th:text="${orderDetail.description}"></h3>-->
-<!--paypal fee : <h3 th:text="${orderDetail.paypal_fee.value}"></h3><span th:text="${orderDetail.paypal_fee.currency_code}"></span>-->
+금액 : <h3 th:text="${orderDetail.purchase_units[0].amount.value}"></h3>
+단위 : <h3 th:text="${orderDetail.purchase_units[0].amount.currency_code}"></h3>
+생성날짜 : <h3 th:text="${orderDetail.purchase_units[0].payments.captures[0].create_time}"></h3>
+
 </body>
 <script>
 </script>

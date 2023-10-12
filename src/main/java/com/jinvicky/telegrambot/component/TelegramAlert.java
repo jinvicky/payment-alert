@@ -47,9 +47,7 @@ public class TelegramAlert {
 
             URL obj = new URL(url); // 호출할 url
             HttpURLConnection con = (HttpURLConnection)obj.openConnection();
-
             con.setRequestMethod("GET");
-
             in = new BufferedReader(new InputStreamReader(con.getInputStream(), "UTF-8"));
 
             String line;
@@ -73,7 +71,6 @@ public class TelegramAlert {
     // 다른 방법
     public void sendAlert2 (String contents) {
         String url = "https://api.telegram.org/bot" + token + "/sendMessage";
-//
         try {
             AlertMsg telegramAlert = new AlertMsg(chatId, contents);
             String param = new Gson().toJson(telegramAlert);

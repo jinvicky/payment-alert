@@ -36,13 +36,7 @@ public class OrderController {
     private TelegramAlert telegramAlert;
 
     @GetMapping("/paypal")
-    public String orderPayPalView(Model m) {
-//        m.addAttribute("clientId", clientId); //sdk js를 위한 clientId 저장
-//        try {
-//            paypalService.checkoutOrder();
-//        } catch (IOException e) {
-//            log.error("paypay order error");
-//        }
+    public String orderPayPalView() {
         return "paypalOrder";
     }
     
@@ -64,9 +58,9 @@ public class OrderController {
 
         // model에 담기
         m.addAttribute("orderDetail", obj);
-        // telegram 알림 보내기 (관리자 수집용)
-//        telegramAlert.sendAlert(resp); //ok
+        telegramAlert.sendAlert2(resp); //ok
 
         return "orderDetail";
     }
+
 }
